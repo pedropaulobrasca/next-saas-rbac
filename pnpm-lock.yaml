@@ -12,7 +12,7 @@ importers:
         specifier: latest
         version: 1.13.2
 
-  packages/eslint-config:
+  config/eslint-config:
     devDependencies:
       '@rocketseat/eslint-config':
         specifier: ^2.2.2
@@ -24,7 +24,7 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0(eslint@8.57.0)
 
-  packages/prettier-config:
+  config/prettier-config:
     devDependencies:
       prettier:
         specifier: ^3.2.5
@@ -33,7 +33,19 @@ importers:
         specifier: ^0.5.13
         version: 0.5.13(prettier@3.2.5)
 
-  packages/typescript-config: {}
+  config/typescript-config: {}
+
+  packages/auth:
+    devDependencies:
+      '@saas/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@saas/prettier-config':
+        specifier: workspace:*
+        version: link:../../config/prettier-config
+      '@saas/typescript-config':
+        specifier: workspace:*
+        version: link:../../config/typescript-config
 
 packages:
 
