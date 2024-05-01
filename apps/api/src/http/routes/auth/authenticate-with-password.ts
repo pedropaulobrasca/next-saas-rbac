@@ -8,21 +8,24 @@ import { prisma } from '@/lib/prisma'
 import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function authenticateWithPassword(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().post('/sessions/password', {
-    schema: {
-      tags: ['auth'],
-      summary: 'Authenticate with password',
-      body: z.object({
-        email: z.string().email(),
-        password: z.string().min(6),
-      }),
-      response: {
-        201: z.object({
-          token: z.string(),
+  app.withTypeProvider<ZodTypeProvider>().post(
+    '/sessions/password',
+    {
+      schema: {
+        tags: ['auth'],
+        summary: 'Authenticate with password',
+        body: z.object({
+          email: z.string().email(),
+          password: z.string().min(6),
         }),
+        response: {
+          201: z.object({
+            token: z.string(),
+          }),
+        },
       },
     },
-    handler: async (request, reply) => {
+    async (request, reply) => {
       const { email, password } = request.body
 
       const userFromEmail = await prisma.user.findUnique({
@@ -59,5 +62,5 @@ export async function authenticateWithPassword(app: FastifyInstance) {
 
       return reply.status(201).send({ token })
     },
-  })
+  )
 }
