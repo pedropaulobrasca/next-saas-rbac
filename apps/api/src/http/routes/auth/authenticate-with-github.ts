@@ -1,4 +1,4 @@
-import { compare } from 'bcryptjs'
+import { env } from '@saas/env'
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -31,14 +31,14 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         'https://github.com/login/oauth/access_token',
       )
 
-      githubOAuthUrl.searchParams.set('client_id', '0ae9890b19bc2133ed33')
+      githubOAuthUrl.searchParams.set('client_id', env.GITHUB_OAUTH_CLIENT_ID)
       githubOAuthUrl.searchParams.set(
         'client_secret',
-        '28cac0434947953357fb959be61daf7be27a346e',
+        env.GITHUB_OAUTH_CLIENT_SECRET,
       )
       githubOAuthUrl.searchParams.set(
         'redirect_uri',
-        'http://localhost:3000/api/auth/callback',
+        env.GITHUB_OAUTH_REDIRECT_URI,
       )
       githubOAuthUrl.searchParams.set('code', code)
 
@@ -137,8 +137,3 @@ export async function authenticateWithGithub(app: FastifyInstance) {
 }
 
 // https://github.com/login/oauth/authorize?client_id=0ae9890b19bc2133ed33&redirect_uri=http://localhost:3000/api/auth/callback&scope=user:email
-// {
-//   access_token: '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',
-//   token_type: 'bearer',
-//   scope: 'user:email'
-// }
