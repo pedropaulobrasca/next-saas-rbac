@@ -135,5 +135,3 @@ export async function authenticateWithGithub(app: FastifyInstance) {
     },
   )
 }
-
-// https://github.com/login/oauth/authorize?client_id=0ae9890b19bc2133ed33&redirect_uri=http://localhost:3000/api/auth/callback&scope=user:email
