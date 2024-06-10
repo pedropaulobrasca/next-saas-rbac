@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
-import githubIcon from '@/assets/github-icon.svg'
+import GithubIcon from '@/assets/github-icon'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -45,7 +44,7 @@ export default function SignUpPage() {
       <Separator />
 
       <Button type="submit" className="w-full" variant="outline">
-        <Image src={githubIcon} alt="" className="mr-2 size-4 dark:invert" />
+        <GithubIcon className="mr-2 size-4 dark:invert" />
         Sign up with GitHub
       </Button>
     </form>
