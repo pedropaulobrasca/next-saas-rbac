@@ -1,6 +1,8 @@
 import { ChevronsUpDown, PlusCircle } from 'lucide-react'
 import Link from 'next/link'
 
+import { getOrganizations } from '@/http/get-organizations'
+
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import {
   DropdownMenu,
@@ -13,6 +15,8 @@ import {
 } from './ui/dropdown-menu'
 
 export default async function OrganizationSwitcher() {
+  const { organizations } = await getOrganizations()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex w-[168px] items-center gap-2 rounded p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
@@ -27,13 +31,19 @@ export default async function OrganizationSwitcher() {
       >
         <DropdownMenuGroup>
           <DropdownMenuLabel>Organizations</DropdownMenuLabel>
-          <DropdownMenuItem>
-            <Avatar className="mr-2 size-4">
-              <AvatarImage src="https://avatars.dicebear.com/api/avataaars/1.svg" />
-              <AvatarFallback />
-            </Avatar>
-            <span className="line-clamp-1">Rocketseat</span>
-          </DropdownMenuItem>
+          {organizations.map((organization) => (
+            <DropdownMenuItem key={organization.id} asChild>
+              <Link href={`/org/${organization.slug}`}>
+                <Avatar className="mr-2 size-4">
+                  {organization.avatarUrl && (
+                    <AvatarImage src={organization.avatarUrl} />
+                  )}
+                  <AvatarFallback />
+                </Avatar>
+                <span className="line-clamp-1">{organization.name}</span>
+              </Link>
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
