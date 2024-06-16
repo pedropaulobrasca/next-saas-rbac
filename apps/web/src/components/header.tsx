@@ -1,9 +1,13 @@
 import { Rocket, Slash } from 'lucide-react'
 
+import { ability } from '@/auth/auth'
+
 import OrganizationSwitcher from './organization-switcher'
 import { ProfileButton } from './profile-button'
 
 export default async function Header() {
+  const permissions = await ability()
+
   return (
     <div className="mx-auto flex max-w-[1200px] items-center justify-between">
       <div className="flex items-center gap-3">
@@ -12,6 +16,15 @@ export default async function Header() {
         <Slash className="size-3 -rotate-[24deg] text-border" />
 
         <OrganizationSwitcher />
+
+        {permissions && permissions.can('get', 'Project') && (
+          <a
+            href="/admin"
+            className="text-sm font-medium text-muted-foreground hover:text-primary"
+          >
+            Projetos
+          </a>
+        )}
       </div>
 
       <div className="flex items-center gap-4">
