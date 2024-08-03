@@ -5,6 +5,7 @@ import { ability } from '@/auth/auth'
 
 import OrganizationSwitcher from './organization-switcher'
 import { ProfileButton } from './profile-button'
+import { ProjectSwitcher } from './project-switcher'
 import { ThemeSwitcher } from './theme/theme-switcher'
 import { Separator } from './ui/separator'
 
@@ -23,12 +24,10 @@ export default async function Header() {
         <OrganizationSwitcher />
 
         {permissions && permissions.can('get', 'Project') && (
-          <a
-            href="/admin"
-            className="text-sm font-medium text-muted-foreground hover:text-primary"
-          >
-            Projetos
-          </a>
+          <>
+            <Slash className="size-3 -rotate-[24deg] text-border" />
+            <ProjectSwitcher />
+          </>
         )}
       </div>
 
