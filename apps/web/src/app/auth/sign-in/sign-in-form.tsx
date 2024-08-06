@@ -1,11 +1,10 @@
 'use client'
 
 import { AlertTriangle, Loader2 } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import githubIcon from '@/assets/github-icon.svg'
+import GithubIcon from '@/assets/github-icon'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -91,7 +90,7 @@ export function SignInForm() {
 
       <form action={signInWithGithub}>
         <Button type="submit" className="w-full" variant="outline">
-          <Image src={githubIcon} alt="" className="mr-2 size-4 dark:invert" />
+          <GithubIcon className="mr-2 size-4 dark:invert" />
           Sign in with GitHub
         </Button>
       </form>
