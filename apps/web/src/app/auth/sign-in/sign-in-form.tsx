@@ -1,10 +1,11 @@
 'use client'
 
 import { AlertTriangle, Loader2 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-import GithubIcon from '@/assets/github-icon'
+import githubIcon from '@/assets/github-icon.svg'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -17,6 +18,7 @@ import { signInWithEmailAndPassword } from './actions'
 
 export function SignInForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     signInWithEmailAndPassword,
@@ -40,7 +42,12 @@ export function SignInForm() {
 
         <div className="space-y-1">
           <Label htmlFor="email">E-mail</Label>
-          <Input name="email" type="email" id="email" />
+          <Input
+            name="email"
+            type="email"
+            id="email"
+            defaultValue={searchParams.get('email') ?? ''}
+          />
 
           {errors?.email && (
             <p className="text-xs font-medium text-red-500 dark:text-red-400">
@@ -58,14 +65,14 @@ export function SignInForm() {
               {errors.password[0]}
             </p>
           )}
-        </div>
 
-        <Link
-          href="/auth/forgot-password"
-          className="text-xs font-medium text-foreground hover:underline"
-        >
-          Forgot your password?
-        </Link>
+          <Link
+            href="/auth/forgot-password"
+            className="text-xs font-medium text-foreground hover:underline"
+          >
+            Forgot your password?
+          </Link>
+        </div>
 
         <Button className="w-full" type="submit" disabled={isPending}>
           {isPending ? (
@@ -79,11 +86,12 @@ export function SignInForm() {
           <Link href="/auth/sign-up">Create new account</Link>
         </Button>
       </form>
+
       <Separator />
 
       <form action={signInWithGithub}>
         <Button type="submit" className="w-full" variant="outline">
-          <GithubIcon className="mr-2 size-4 dark:invert" />
+          <Image src={githubIcon} alt="" className="mr-2 size-4 dark:invert" />
           Sign in with GitHub
         </Button>
       </form>
