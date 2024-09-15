@@ -13,14 +13,13 @@
     "@fastify/jwt": "^8.0.0",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^3.0.0",
-    "@prisma/client": "^5.13.0",
+    "@prisma/client": "^5.19.1",
     "@saas/auth": "workspace:*",
     "@saas/env": "workspace:*",
     "bcryptjs": "^2.4.3",
     "fastify": "^4.26.2",
     "fastify-plugin": "^4.5.1",
     "fastify-type-provider-zod": "^1.1.9",
-    "prisma": "^5.13.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -31,6 +30,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.12.7",
     "dotenv-cli": "^7.4.1",
+    "prisma": "^5.19.1",
     "tsx": "^4.7.2"
   },
   "prisma": {
